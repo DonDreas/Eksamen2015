@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EksamensOpgave2015
 {
-    class User : IComparable
+    public class User : IComparable
     {
         public int ID { get { return this.ID; } private set { this.ID = value; } }
 
@@ -19,8 +19,8 @@ namespace EksamensOpgave2015
             {
                 if (value == null)
                     throw new ArgumentNullException("value");
-
-                _firstName = value;
+                else
+                    _firstName = value;
             }
         }
 
@@ -32,8 +32,8 @@ namespace EksamensOpgave2015
             {
                 if (value == null)
                     throw new ArgumentNullException("value");
-
-                _lastName = value;
+                else
+                    _lastName = value;
             }
         }
 
@@ -45,8 +45,8 @@ namespace EksamensOpgave2015
             {
                 if (value.All(c => !(c >= 0 || 9 >= c || c >= 'a' || 'z' >= c || c == '_')))
                     throw new ArgumentOutOfRangeException("value");
-
-                _userName = value;
+                else
+                    _userName = value;
             }
         }
 
@@ -90,7 +90,7 @@ namespace EksamensOpgave2015
             this.balance = balance;
         }
 
-        private override string AutomaticInfo()
+        public string AutomaticInfo()
         {
             return this.firstName + this.lastName + this.email;
         }

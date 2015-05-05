@@ -6,35 +6,29 @@ using System.Threading.Tasks;
 
 namespace EksamensOpgave2015
 {
-    class SeasonalProduct : Product
+    public class SeasonalProduct : Product
     {
-        private string _seasonStartDate;
         public string seasonStartDate 
         {
-            get { return _seasonStartDate; }
+            get { return seasonStartDate; }
             set
             {
                 if (value == null)
                     this.active = true;
                 else
                     this.seasonStartDate = value;
-
-                _seasonStartDate = value;
             }
         }
 
-        private string _seasonEndDate;
         public string seasonEndDate
         {
-            get { return _seasonEndDate; }
+            get { return seasonEndDate; }
             set
             {
                 if (value == null)
                     this.active = true;
                 else
                     this.seasonEndDate = value;
-
-                _seasonEndDate = value;
             }
         }
 
@@ -47,6 +41,5 @@ namespace EksamensOpgave2015
             this.seasonEndDate = seasonEndDate;
             this.active = active;
         }
-        
     }
 }

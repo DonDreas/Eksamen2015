@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EksamensOpgave2015
 {
-    class Product
+    public class Product
     {
         private int _produktId;
         public int productId
@@ -16,8 +16,8 @@ namespace EksamensOpgave2015
             {
                 if (value < 1)
                     throw new ArgumentOutOfRangeException("value");
-
-                _produktId = value;
+                else
+                    _produktId = value;
             }
         }
 
@@ -29,8 +29,8 @@ namespace EksamensOpgave2015
             {
                 if (value == null)
                     throw new ArgumentOutOfRangeException();
-
-                _name = value;
+                else
+                    _name = value;
             }
         }
 
@@ -46,8 +46,7 @@ namespace EksamensOpgave2015
             this.name = name;
             this.price = price;
             this.active = active;
-            this.canBeBoughtOnCredit = canBeBoughtOnCredit;
-
+            this.canBeBoughtOnCredit = false;
         }
     }
 }
