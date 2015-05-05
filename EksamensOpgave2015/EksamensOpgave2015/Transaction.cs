@@ -46,7 +46,7 @@ namespace EksamensOpgave2015
             this.amout = amout;
         }
 
-        new public abstract string ToString();
-        new public abstract void Execute();
+        new public abstract string toString();
+        new public abstract decimal Execute();
     }
 }

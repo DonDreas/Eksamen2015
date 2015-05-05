@@ -21,9 +21,9 @@ namespace EksamensOpgave2015
             return this.insertAmount + " " + this.amout + " " + this.user + " " + this.date + " " + this.transactionID;
         }
 
-        public override void Execute()
+        public override decimal Execute()
         {
-            
+            return user.balance + insertAmount;
         }
     }
 }

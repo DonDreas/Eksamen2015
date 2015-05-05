@@ -8,27 +8,29 @@ namespace EksamensOpgave2015
 {
     public class SeasonalProduct : Product
     {
+        private string _seasonStartDate;
         public string seasonStartDate 
         {
-            get { return seasonStartDate; }
+            get { return _seasonStartDate; }
             set
             {
                 if (value == null)
                     this.active = true;
                 else
-                    this.seasonStartDate = value;
+                    _seasonStartDate = value;
             }
         }
 
+        private string _seasonEndDate;
         public string seasonEndDate
         {
-            get { return seasonEndDate; }
+            get { return _seasonEndDate; }
             set
             {
                 if (value == null)
                     this.active = true;
                 else
-                    this.seasonEndDate = value;
+                    _seasonEndDate = value;
             }
         }
 

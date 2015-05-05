@@ -73,7 +73,8 @@ namespace EksamensOpgave2015
                 if (checkLastLetter == '.' || checkLastLetter == '-')
                     throw new ArgumentOutOfRangeException();
 
-                _email = value;
+                else
+                    _email = value;
             }
         }
 
