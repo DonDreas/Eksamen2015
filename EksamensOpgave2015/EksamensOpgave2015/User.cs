@@ -15,7 +15,7 @@ namespace EksamensOpgave2015
             set
             {
                 if (firstName == null)
-                    throw new ArgumentException();
+                    throw new ArgumentNullException();
             }
         }
 
@@ -25,11 +25,23 @@ namespace EksamensOpgave2015
             set
             {
                 if (lastName == null)
-                    throw new ArgumentException();
+                    throw new ArgumentNullException();
+            }
+        }
+
+        private string userName
+        {
+            get;
+            set
+            {
+                if (userName.All(c => c < 0 || 9 < c || c < 'a' || 'z' < c))
+                {
+                        throw new ArgumentOutOfRangeException();
+                }
             }
         }
         public User(int ID, string firstName, string lastName,
-            string username, string email, string balance)
+            string userName, string email, double balance)
         {
 
         }
