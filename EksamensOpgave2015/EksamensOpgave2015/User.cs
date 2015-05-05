@@ -10,44 +10,53 @@ namespace EksamensOpgave2015
     class User
     {
         private int ID { get; set; }
-        private string firstName
+
+        private string _firstName;
+        public string firstName
         {
-            get;
+            get { return _firstName; }
             set
             {
-                if (firstName == null)
-                    throw new ArgumentNullException();
+                if (value == null)
+                    throw new ArgumentNullException("value");
+
+                _firstName = value;
             }
         }
 
-        private string lastName
+        private string _lastName;
+        public string lastName
         {
-            get;
+            get { return _lastName; }
             set
             {
-                if (lastName == null)
-                    throw new ArgumentNullException();
+                if (value == null)
+                    throw new ArgumentNullException("value");
+
+                _lastName = value;
             }
         }
 
-        private string userName
+        private string _userName;
+        public string userName
         {
-            get;
+            get { return _userName; }
             set
             {
-                if (userName.All(c => !(c >= 0 || 9 >= c || c >= 'a' || 'z' >= c || c == '_')))
-                {
-                    throw new ArgumentOutOfRangeException();
-                }
+                if (value.All(c => !(c >= 0 || 9 >= c || c >= 'a' || 'z' >= c || c == '_')))
+                    throw new ArgumentOutOfRangeException("value");
+
+                _userName = value;
             }
         }
 
-        private string email
+        private string _email;
+        public string email
         {
-            get;
+            get { return _email; }
             set
             {
-                string[] split = email.Split('@');
+                string[] split = value.Split('@');
                 if (split[0].All(c => !(c >= 0 || 9 >= c || c >= 'a' || 'z' >= c || c >= 'A' || 'Z' >= c
                     || c == '.' || c == '-' || c == '_')))
                     throw new ArgumentOutOfRangeException();
@@ -64,12 +73,21 @@ namespace EksamensOpgave2015
                 if (checkLastLetter == '.' || checkLastLetter == '-')
                     throw new ArgumentOutOfRangeException();
 
+                _email = value;
             }
         }
+
+        private double balance { get; set; }
+
         public User(int ID, string firstName, string lastName,
             string userName, string email, double balance)
         {
-
+            this.ID = ID;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.userName = userName;
+            this.email = email;
+            this.balance = balance;
         }
     }
 }
