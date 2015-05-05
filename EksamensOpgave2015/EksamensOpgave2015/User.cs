@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace EksamensOpgave2015
 {
-    class User
+    class User : IComparable
     {
-        private int ID { get; set; }
+        public int ID { get; private set; }
 
         private string _firstName;
         public string firstName
@@ -77,10 +77,10 @@ namespace EksamensOpgave2015
             }
         }
 
-        private double balance { get; set; }
+        public decimal balance { get; private set; }
 
         public User(int ID, string firstName, string lastName,
-            string userName, string email, double balance)
+            string userName, string email, decimal balance)
         {
             this.ID = ID;
             this.firstName = firstName;
@@ -88,6 +88,35 @@ namespace EksamensOpgave2015
             this.userName = userName;
             this.email = email;
             this.balance = balance;
+        }
+
+        private override string AutomaticInfo()
+        {
+            return this.firstName + this.lastName + this.email;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.ID;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is User || obj == null))
+                return false;
+            else
+            {
+                User compareID = (User)obj;
+                if (this.GetHashCode() == compareID.GetHashCode())
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        public int CompareTo(object obj)
+        {
+
         }
     }
 }
