@@ -9,7 +9,7 @@ namespace EksamensOpgave2015
 {
     class User : IComparable
     {
-        public int ID { get; private set; }
+        public int ID { get { return this.ID; } private set { this.ID = value; } }
 
         private string _firstName;
         public string firstName
@@ -77,7 +77,7 @@ namespace EksamensOpgave2015
             }
         }
 
-        public decimal balance { get; private set; }
+        public decimal balance { get { return this.balance; } set { this.balance = value; } }
 
         public User(int ID, string firstName, string lastName,
             string userName, string email, decimal balance)
@@ -122,7 +122,6 @@ namespace EksamensOpgave2015
                 return this.ID.CompareTo(UserID.ID);
             else
                 throw new ArgumentNullException();
-
         }
     }
 }
