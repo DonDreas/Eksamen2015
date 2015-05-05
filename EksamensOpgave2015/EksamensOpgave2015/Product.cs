@@ -40,8 +40,7 @@ namespace EksamensOpgave2015
 
         public bool canBeBoughtOnCredit { get { return this.canBeBoughtOnCredit; } set { this.canBeBoughtOnCredit = value; } }
 
-        public Product(int productId, string name, decimal price, 
-            bool active, bool canBeboughtOnCredit)
+        public Product(int productId, string name, decimal price, bool canBeboughtOnCredit)
         {
             this.productId = productId;
             this.name = name;
