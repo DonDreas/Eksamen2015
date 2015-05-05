@@ -18,8 +18,8 @@ namespace EksamensOpgave2015
             {
                 if (value == null)
                     throw new ArgumentNullException("value");
-
-                _user = value;
+                else
+                    _user = value;
             }
         }
 
@@ -31,8 +31,8 @@ namespace EksamensOpgave2015
             {
                 if (value == null)
                     throw new ArgumentNullException("value");
-
-                _date = value;
+                else
+                    _date = value;
             }
         }
 
@@ -46,14 +46,7 @@ namespace EksamensOpgave2015
             this.amout = amout;
         }
 
-        private string toString()
-        {
-            return this.transactionID + " " + this.amout + " " + this.date;
-        }
-
-        private void execute()
-        {
-
-        }
+        new public abstract string ToString();
+        new public abstract void Execute();
     }
 }

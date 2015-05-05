@@ -13,7 +13,17 @@ namespace EksamensOpgave2015
         public InsertCashTransaction(int transactionId, User user, string date, decimal amount, decimal insertAmount)
             : base(transactionId, user, date, amount)
         {
+            user.balance = user.balance + insertAmount;
+        }
 
+        public override string toString()
+        {
+            return this.insertAmount + " " + this.amout + " " + this.user + " " + this.date + " " + this.transactionID;
+        }
+
+        public override void Execute()
+        {
+            
         }
     }
 }
