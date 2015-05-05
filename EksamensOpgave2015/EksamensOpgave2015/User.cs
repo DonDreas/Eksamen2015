@@ -116,6 +116,12 @@ namespace EksamensOpgave2015
 
         public int CompareTo(object obj)
         {
+            User UserID = obj as User;
+
+            if (UserID != null)
+                return this.ID.CompareTo(UserID.ID);
+            else
+                throw new ArgumentNullException();
 
         }
     }
