@@ -40,8 +40,8 @@ namespace EksamensOpgave2015
 
         public bool active { get; set; }
 
-        public SeasonalProduct(int productId, string name, decimal price, bool canBeboughtOnCredit, string seasonStartDate, string seasonEndDate, bool active)
-            : base(productId, name, price, canBeboughtOnCredit)
+        public SeasonalProduct(int productId, string name, decimal price, bool canBeBoughtOnCredit, string seasonStartDate, string seasonEndDate, bool active)
+            : base(productId, name, price, canBeBoughtOnCredit)
         {
             this.seasonStartDate = seasonStartDate;
             this.seasonEndDate = seasonEndDate;
