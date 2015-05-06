@@ -73,7 +73,7 @@ namespace EksamensOpgave2015
             reader.ReadLine();
             while ((line = reader.ReadLine()) != null)
             {
-                Console.WriteLine("Heeej");
+                //Console.WriteLine("Heeej");
                 string[] values = line.Split(';');
                 values[PRODUCTNAME] = Regex.Replace(values[PRODUCTNAME], "<.*?>\"", string.Empty);
                 ProductList.Add(new Product(Int32.Parse(values[PRODUCTID]), values[PRODUCTNAME], decimal.Parse(values[PRODUCTPRICE]), Int32.Parse(values[PRODUCTACTIVE]) == 1 ? true : false));

@@ -17,6 +17,8 @@ namespace EksamensOpgave2015
 
         public void Start()
         {
+            Console.WriteLine(PrintProductFormatted());
+
             foreach (Product product in Linesystem.ProductList)
             {
                 if (product.active)
@@ -28,12 +30,12 @@ namespace EksamensOpgave2015
 
         public string PrintProductFormatted()
         {
-            return "ID".PadRight(4) + "Produkt".PadRight(32) + "Pris".PadRight(6);
+            return "ID".PadRight(6) + "Produkt".PadRight(36) + "Pris".PadRight(6);
         }
 
         public string PrintProductFormatted(Product product)
         {
-            return product.productId.ToString().PadRight(4) + product.name.PadRight(32) + product.price.ToString().PadRight(6);
+            return product.productId.ToString().PadRight(6) + product.name.PadRight(36) + product.price.ToString().PadRight(6);
         }
     }
 }
