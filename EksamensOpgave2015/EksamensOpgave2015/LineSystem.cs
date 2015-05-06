@@ -25,6 +25,11 @@ namespace EksamensOpgave2015
 
         public DateTime Today = DateTime.Today;
 
+        public string SetFormatDateTime(DateTime date)
+        {
+            return date.ToString("MM-dd");
+        }
+        
         public void BuyProduct(User user, Product product)
         {
 
