@@ -12,6 +12,8 @@ namespace EksamensOpgave2015
         {
             LineSystem linesystem = new LineSystem();
             linesystem.ReadFile();
+            LinesystemCLI cli = new LinesystemCLI(linesystem);
+            cli.Start();
             Console.ReadKey();
         }
     }
