@@ -9,6 +9,11 @@ namespace EksamensOpgave2015
 {
     public class LineSystem
     {
+        private const int PRODUCTID = 0;
+        private const int PRODUCTNAME = 1; 
+        private const int PRODUCTPRICE = 2;
+        private const int PRODUCTACTIVE = 3;
+
         public User user { get; set; }
         public Product product { get; set; }
         public Transaction transaction { get; set; }
@@ -40,19 +45,19 @@ namespace EksamensOpgave2015
 
         }
 
-        public void GetProduct()
+        public Product GetProduct(int productId)
         {
-
+            return ProductList.Find(c => c.productId == productId);
         }
 
-        public void GetUser()
+        public User GetUser(string userName)
         {
-
+            return UserList.Find(c => c.userName == userName);
         }
 
-        public void GetTransactionList()
+        public List<Transaction> GetTransactionList(User user, int amount)
         {
-
+            return TransactionList.FindAll(c => c.user == user && c.transactionID < TransactionList.Count - 1 && c.transactionID > TransactionList.Count - amount);
         }
 
         public void GetActiveProducts()
@@ -62,12 +67,14 @@ namespace EksamensOpgave2015
 
         public void ReadFile()
         {
-            var reader = new StreamReader(File.OpenRead(@"products.csv"));
-
-            while (!reader.EndOfStream)
+            StreamReader reader = new StreamReader(File.OpenRead(@"products.csv"));
+            List<string> ListReader = new List<string>();
+            string line;
+            //reader.ReadLine();
+            while ((line = reader.ReadLine()) != null)
             {
-                var line = reader.ReadLine();
-                var values = line.Split(';');
+                string[] values = line.Split(';');
+                ProductList.Add(new Product(Int32.Parse(values[PRODUCTID]), values[PRODUCTNAME], decimal.Parse(values[PRODUCTPRICE]), bool.Parse(values[PRODUCTNAME])));
             }
         }
 

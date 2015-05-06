@@ -69,7 +69,7 @@ namespace EksamensOpgave2015
                 if (checkFirstLetter == '.' || checkFirstLetter == '-')
                     throw new ArgumentOutOfRangeException();
 
-                char checkLastLetter = split[1].First();
+                char checkLastLetter = split[1].Last();
                 if (checkLastLetter == '.' || checkLastLetter == '-')
                     throw new ArgumentOutOfRangeException();
 

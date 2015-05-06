@@ -20,18 +20,18 @@ namespace EksamensOpgave2015
             this.insertAmount = insertAmount;
         }
 
-        public override string toString()
+        public override string ToString()
         {
             return "This happens:" + "" + base.ToString();
             //return this.insertAmount + " " + this.amount + " " + this.user + " " + this.date + " " + this.transactionID;
         }
 
-        public override decimal Execute()
+        public override void Execute()
         {
             if (user.balance - product.price < 0)
                 throw new InsufficientCreditsException();
             else
-                return user.balance - product.price;
+                user.balance = user.balance - product.price;
         }
     }
 }

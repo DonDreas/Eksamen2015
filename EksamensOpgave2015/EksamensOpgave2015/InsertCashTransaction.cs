@@ -16,15 +16,15 @@ namespace EksamensOpgave2015
             user.balance = user.balance + insertAmount;
         }
 
-        public override string toString()
+        public override string ToString()
         {
             return "Lort" + "" + base.ToString(); //Charlie jeg tror jeg er smart
             //return this.insertAmount + " " + this.amount + " " + this.user + " " + this.date + " " + this.transactionID;
         }
 
-        public override decimal Execute()
+        public override void Execute()
         {
-            return user.balance += insertAmount;
+            user.balance = user.balance += insertAmount;
         }
     }
 }
