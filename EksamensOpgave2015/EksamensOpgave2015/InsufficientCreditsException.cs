@@ -11,7 +11,6 @@ namespace EksamensOpgave2015
         private User user { get; set; }
         private Product product { get; set; }
 
-
         public InsufficientCreditsException()
             : base("Your can currently not affort this product. Insufficient result")
         {

@@ -18,12 +18,13 @@ namespace EksamensOpgave2015
 
         public override string toString()
         {
-            return this.insertAmount + " " + this.amout + " " + this.user + " " + this.date + " " + this.transactionID;
+            return "Lort" + "" + base.ToString(); //Charlie jeg tror jeg er smart
+            //return this.insertAmount + " " + this.amount + " " + this.user + " " + this.date + " " + this.transactionID;
         }
 
         public override decimal Execute()
         {
-            return user.balance + insertAmount;
+            return user.balance += insertAmount;
         }
     }
 }

@@ -36,17 +36,24 @@ namespace EksamensOpgave2015
             }
         }
 
-        public decimal amout { get; set; }
+        public decimal amount { get; set; }
 
         public Transaction(decimal transactionID, User user, string date, decimal amount)
         {
             this.transactionID = transactionID;
             this.user = user;
             this.date = date;
-            this.amout = amout;
+            this.amount = amount;
         }
 
-        new public abstract string toString();
-        new public abstract decimal Execute();
+        //new public abstract string toString();
+        //new public abstract decimal Execute();
+
+        public override string ToString()
+        {
+            return "ID: " + this.transactionID.ToString().PadLeft(4) + "  Amount: " + this.amount.ToString().PadLeft(4) + "   " + this.date; //MÅSKE... Google
+        }
+
+        public abstract void Execute();
     }
 }

@@ -34,11 +34,22 @@ namespace EksamensOpgave2015
             }
         }
 
-        public decimal price { get {return this.price; }  set {this.price = value; } }
+        private decimal _price;
+        public decimal price
+        {
+            get { return _price; }
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentException("Value");
+                else
+                    _price = value;
+            }
+        }
 
-        public bool active { get {return this.active; } set {this.active = value; } }
+        public bool active { get; set; }
 
-        public bool canBeBoughtOnCredit { get { return this.canBeBoughtOnCredit; } set { this.canBeBoughtOnCredit = value; } }
+        public bool canBeBoughtOnCredit { get; set; }
 
         public Product(int productId, string name, decimal price, bool canBeboughtOnCredit)
         {

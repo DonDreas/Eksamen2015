@@ -9,7 +9,7 @@ namespace EksamensOpgave2015
 {
     public class User : IComparable
     {
-        public int ID { get { return this.ID; } private set { this.ID = value; } }
+        public int ID { get; set; }
 
         private string _firstName;
         public string firstName
@@ -93,7 +93,7 @@ namespace EksamensOpgave2015
 
         public string AutomaticInfo()
         {
-            return this.firstName + this.lastName + this.email;
+            return "" + this.firstName + " " + this.lastName + "( " + this.email + ")";
         }
 
         public override int GetHashCode()
@@ -122,7 +122,7 @@ namespace EksamensOpgave2015
             if (UserID != null)
                 return this.ID.CompareTo(UserID.ID);
             else
-                throw new ArgumentNullException();
+                throw new ArgumentException();
         }
     }
 }

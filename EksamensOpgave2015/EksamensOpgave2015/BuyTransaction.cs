@@ -22,7 +22,8 @@ namespace EksamensOpgave2015
 
         public override string toString()
         {
-            return this.insertAmount + " " + this.amout + " " + this.user + " " + this.date + " " + this.transactionID;
+            return "This happens:" + "" + base.ToString();
+            //return this.insertAmount + " " + this.amount + " " + this.user + " " + this.date + " " + this.transactionID;
         }
 
         public override decimal Execute()
