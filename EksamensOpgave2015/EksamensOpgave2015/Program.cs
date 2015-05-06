@@ -10,6 +10,9 @@ namespace EksamensOpgave2015
     {
         static void Main(string[] args)
         {
+            LineSystem linesystem = new LineSystem();
+            linesystem.ReadFile();
+            Console.ReadKey();
         }
     }
 }

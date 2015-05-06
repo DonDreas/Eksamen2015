@@ -8,12 +8,9 @@ namespace EksamensOpgave2015
 {
     public class InsertCashTransaction : Transaction
     {
-        public decimal insertAmount { get; set; }
-
-        public InsertCashTransaction(int transactionId, User user, string date, decimal amount, decimal insertAmount)
+        public InsertCashTransaction(int transactionId, User user, string date, decimal amount)
             : base(transactionId, user, date, amount)
         {
-            user.balance = user.balance + insertAmount;
         }
 
         public override string ToString()
@@ -24,7 +21,10 @@ namespace EksamensOpgave2015
 
         public override void Execute()
         {
-            user.balance = user.balance += insertAmount;
+            this.user.balance += this.amount;
+            string text = this.ToString();
+
+            System.IO.File.WriteAllText("log.txt", text);
         }
     }
 }

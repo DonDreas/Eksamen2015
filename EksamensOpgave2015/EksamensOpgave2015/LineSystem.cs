@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace EksamensOpgave2015
 {
@@ -22,27 +23,21 @@ namespace EksamensOpgave2015
         public List<Product> ProductList = new List<Product>();
         public List<Transaction> TransactionList = new List<Transaction>();
 
-        public LineSystem(User user, Product product, Transaction transaction)
-        {
-
-        }
+        public DateTime Today = DateTime.Today;
 
         public void BuyProduct(User user, Product product)
         {
-            user.balance = user.balance - product.price;
+
+            TransactionList.Add(new BuyTransaction(TransactionList.Count + 1, user, Today.ToShortDateString(), product));
         }
 
-        public void AddCreditsToAccount(User user, Transaction transaction)
+        public void AddCreditsToAccount(User user, decimal amount)
         {
-            string text = transaction.ToString();
-
-            user.balance = user.balance + transaction.amount;
-            System.IO.File.WriteAllText("log.txt", text);
+            TransactionList.Add(new InsertCashTransaction(TransactionList.Count + 1, user, Today.ToShortDateString(), amount));
         }
 
         public void ExecuteTransaction(Transaction transaction) 
         {
-
         }
 
         public Product GetProduct(int productId)
@@ -60,9 +55,9 @@ namespace EksamensOpgave2015
             return TransactionList.FindAll(c => c.user == user && c.transactionID < TransactionList.Count - 1 && c.transactionID > TransactionList.Count - amount);
         }
 
-        public void GetActiveProducts()
+        public List<Product> GetActiveProducts()
         {
-
+            return ProductList.FindAll(c => c.active == true);
         }
 
         public void ReadFile()
@@ -70,18 +65,14 @@ namespace EksamensOpgave2015
             StreamReader reader = new StreamReader(File.OpenRead(@"products.csv"));
             List<string> ListReader = new List<string>();
             string line;
-            //reader.ReadLine();
+            reader.ReadLine();
             while ((line = reader.ReadLine()) != null)
             {
                 string[] values = line.Split(';');
-                ProductList.Add(new Product(Int32.Parse(values[PRODUCTID]), values[PRODUCTNAME], decimal.Parse(values[PRODUCTPRICE]), bool.Parse(values[PRODUCTNAME])));
+                values[PRODUCTNAME] = Regex.Replace(values[PRODUCTNAME], "<.*?>\"", string.Empty);
+                ProductList.Add(new Product(Int32.Parse(values[PRODUCTID]), values[PRODUCTNAME], decimal.Parse(values[PRODUCTPRICE]), Int32.Parse(values[PRODUCTACTIVE]) == 1 ? true : false));
             }
         }
-
-
-
-
-        //public System.IO.File.WriteAllText(@"log.txt", text)
     }
 }
 

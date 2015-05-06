@@ -9,15 +9,12 @@ namespace EksamensOpgave2015
     public class BuyTransaction : Transaction
     {
         public Product product { get; set; }
-        public decimal amount { get; set; }
         public decimal insertAmount { get; set; }
 
-        BuyTransaction(decimal transactionID, User user, string date, Product product, decimal amount, decimal insertAmount)
-            : base(transactionID, user, date, amount)
+        public BuyTransaction(decimal transactionID, User user, string date, Product product)
+            : base(transactionID, user, date, product.price)
         {
             this.product = product;
-            this.amount = amount;
-            this.insertAmount = insertAmount;
         }
 
         public override string ToString()
@@ -29,9 +26,13 @@ namespace EksamensOpgave2015
         public override void Execute()
         {
             if (user.balance - product.price < 0)
-                throw new InsufficientCreditsException();
+                throw new InsufficientCreditsException(product, user);
             else
+            {
                 user.balance = user.balance - product.price;
+                string text = this.ToString();
+                System.IO.File.WriteAllText("log.txt", text);
+            }
         }
     }
 }
