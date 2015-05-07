@@ -78,7 +78,7 @@ namespace EksamensOpgave2015
             }
         }
 
-        public decimal balance { get { return this.balance; } set { this.balance = value; } }
+        public decimal balance { get; set; }
 
         public User(int ID, string firstName, string lastName,
             string userName, string email, decimal balance)

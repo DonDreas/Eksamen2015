@@ -30,8 +30,6 @@ namespace EksamensOpgave2015
             else
             {
                 user.balance = user.balance - product.price;
-                string text = this.ToString();
-                System.IO.File.WriteAllText("log.txt", text);
             }
         }
     }

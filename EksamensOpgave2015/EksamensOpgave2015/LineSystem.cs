@@ -15,6 +15,13 @@ namespace EksamensOpgave2015
         private const int PRODUCTPRICE = 2;
         private const int PRODUCTACTIVE = 3;
 
+        private const int USERID = 0;
+        private const int FIRSTNAME = 1;
+        private const int LASTNAME = 2;
+        private const int USERNAME = 3;
+        private const int EMAIL = 4;
+        private const int BALANCE = 5;
+
         public User user { get; set; }
         public Product product { get; set; }
         public Transaction transaction { get; set; }
@@ -22,6 +29,12 @@ namespace EksamensOpgave2015
         public List<User> UserList = new List<User>();
         public List<Product> ProductList = new List<Product>();
         public List<Transaction> TransactionList = new List<Transaction>();
+
+        public LineSystem()
+        {
+            ReadFile();
+            ReadUser();
+        }
 
         public DateTime Today = DateTime.Today;
 
@@ -33,11 +46,13 @@ namespace EksamensOpgave2015
         public void BuyProduct(User user, Product product)
         {
             TransactionList.Add(new BuyTransaction(TransactionList.Count + 1, user, Today.ToShortDateString(), product));
+            ExecuteTransaction(TransactionList[TransactionList.Count - 1]);
         }
 
         public void AddCreditsToAccount(User user, decimal amount)
         {
             TransactionList.Add(new InsertCashTransaction(TransactionList.Count + 1, user, Today.ToShortDateString(), amount));
+            ExecuteTransaction(TransactionList[TransactionList.Count - 1]);
         }
 
         public void ExecuteTransaction(Transaction transaction) 
@@ -49,6 +64,7 @@ namespace EksamensOpgave2015
                 {
                     writer.WriteLine(transaction.ToString());
                 }
+                MakeUserFile();
             }
             catch (InsufficientCreditsException e)
             {
@@ -67,7 +83,12 @@ namespace EksamensOpgave2015
 
         public User GetUser(string userName)
         {
-            return UserList.Find(c => c.userName == userName);
+            if (UserList.Exists(c => c.userName == userName))
+            {
+                return UserList.Find(c => c.userName == userName);
+            }
+            else
+                throw new ArgumentOutOfRangeException("Not found");
         }
 
         public List<Transaction> GetTransactionList(User user, int amount)
@@ -80,20 +101,35 @@ namespace EksamensOpgave2015
             return ProductList.FindAll(c => c.active == true);
         }
 
-        public void AddUser(int ID, string firstName, string lastName, string userName, string email, decimal balance)
+        public void MakeUserFile()
         {
-            UserList.Add(new User(ID, firstName, lastName, userName, email, balance));
             string text = "";
             foreach (User user in UserList)
             {
-                text += user.ID + " " + user.firstName + " " + user.lastName + " " + user.userName + " " + user.email + " " + user.balance + "\n";
+                text += user.ID + ";" + user.firstName + ";" + user.lastName + ";" + user.userName + ";" + user.email + ";" + user.balance + "\n";
             }
             System.IO.File.WriteAllText("User.txt", text);
         }
 
+        public void AddUser(int ID, string firstName, string lastName, string userName, string email, decimal balance)
+        {
+            UserList.Add(new User(ID, firstName, lastName, userName, email, balance));
+            MakeUserFile();
+        }
+
         public void ReadUser()
         {
+            StreamReader readUser = new StreamReader(@"User.txt", Encoding.Default);
+            List<string> ListReader = new List<string>();
+            string line;
+            readUser.ReadLine();
+            while ((line = readUser.ReadLine()) != null)
+            {
+                string[] values = line.Split(';');
 
+                UserList.Add(new User(Int32.Parse(values[USERID]), values[FIRSTNAME], values[LASTNAME], values[USERNAME], values[EMAIL], Decimal.Parse(values[BALANCE])));
+            }
+            readUser.Close();
         }
 
         public void ReadProductData()

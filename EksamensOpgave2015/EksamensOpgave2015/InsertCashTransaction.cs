@@ -22,9 +22,6 @@ namespace EksamensOpgave2015
         public override void Execute()
         {
             this.user.balance += this.amount;
-            string text = this.ToString();
-
-            System.IO.File.WriteAllText("log.txt", text);
         }
     }
 }
