@@ -57,12 +57,12 @@ namespace EksamensOpgave2015
 
         public void DisplayUserNotFound(string message)
         {
-
+            throw new NotImplementedException();
         }
 
         public void DisplayProductNotFound(string message)
         {
-
+            throw new NotImplementedException();
         }
 
         public void DisplayUserInfo()

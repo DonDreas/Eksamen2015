@@ -20,7 +20,6 @@ namespace EksamensOpgave2015
         public override string ToString()
         {
             return "Buy: " + this.amount + " " + this.user + " " + this.date + " " + this.transactionID + " " + this.product.productId;
-            //return this.insertAmount + " " + this.amount + " " + this.user + " " + this.date + " " + this.transactionID;
         }
 
         public override void Execute()

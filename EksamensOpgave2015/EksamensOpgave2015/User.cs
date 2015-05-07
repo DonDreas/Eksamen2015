@@ -18,7 +18,7 @@ namespace EksamensOpgave2015
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException("Firstname may not be null!");
                 else
                     _firstName = value;
             }
@@ -31,7 +31,7 @@ namespace EksamensOpgave2015
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException("Lastname may not be null!");
                 else
                     _lastName = value;
             }
@@ -44,7 +44,7 @@ namespace EksamensOpgave2015
             set
             {
                 if (value.All(c => !(c >= 0 || 9 >= c || c >= 'a' || 'z' >= c || c == '_')))
-                    throw new ArgumentOutOfRangeException("value");
+                    throw new ArgumentOutOfRangeException("Ugyldigt tegn!");
                 else
                     _userName = value;
             }

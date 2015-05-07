@@ -17,7 +17,7 @@ namespace EksamensOpgave2015
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException("User may not be null!");
                 else
                     _user = value;
             }
@@ -30,7 +30,7 @@ namespace EksamensOpgave2015
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException("Date may not be null!");
                 else
                     _date = value;
             }

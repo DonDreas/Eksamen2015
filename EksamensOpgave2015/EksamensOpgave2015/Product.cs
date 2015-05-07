@@ -15,7 +15,7 @@ namespace EksamensOpgave2015
             set
             {
                 if (value < 1)
-                    throw new ArgumentOutOfRangeException("value");
+                    throw new ArgumentOutOfRangeException("Bigger than 1.");
                 else
                     _produktId = value;
             }
@@ -28,7 +28,7 @@ namespace EksamensOpgave2015
             set
             {
                 if (value == null)
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException("Name may not be null!");
                 else
                     _name = value;
             }
@@ -41,7 +41,7 @@ namespace EksamensOpgave2015
             set
             {
                 if (value < 0)
-                    throw new ArgumentException("Value");
+                    throw new ArgumentException("Price has to be more than 0.");
                 else
                     _price = value;
             }
