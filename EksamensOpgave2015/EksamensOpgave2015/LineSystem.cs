@@ -67,7 +67,7 @@ namespace EksamensOpgave2015
 
         public void ReadFile()
         {
-            StreamReader reader = new StreamReader(File.OpenRead(@"products.csv"));
+            StreamReader reader = new StreamReader(@"products.csv", Encoding.Default);
             List<string> ListReader = new List<string>();
             string line;
             reader.ReadLine();
@@ -75,7 +75,7 @@ namespace EksamensOpgave2015
             {
                 //Console.WriteLine("Heeej");
                 string[] values = line.Split(';');
-                values[PRODUCTNAME] = Regex.Replace(values[PRODUCTNAME], "<.*?>\"", string.Empty);
+                values[PRODUCTNAME] = Regex.Replace(values[PRODUCTNAME], @"<[^>]*>", string.Empty);
                 ProductList.Add(new Product(Int32.Parse(values[PRODUCTID]), values[PRODUCTNAME], decimal.Parse(values[PRODUCTPRICE]), Int32.Parse(values[PRODUCTACTIVE]) == 1 ? true : false));
             }
             reader.Close();
