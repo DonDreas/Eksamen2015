@@ -15,8 +15,8 @@ namespace EksamensOpgave2015
 
         public override string ToString()
         {
-            return "Lort" + "" + base.ToString(); //Charlie jeg tror jeg er smart
-            //return this.insertAmount + " " + this.amount + " " + this.user + " " + this.date + " " + this.transactionID;
+            return "Payment " + this.amount + " " + this.user + " " + this.date + " " + this.transactionID;
+            //return this.amount + " " + this.user + " " + this.date + " " + this.transactionID;
         }
 
         public override void Execute()

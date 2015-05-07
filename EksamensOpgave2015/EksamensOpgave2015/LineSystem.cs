@@ -22,6 +22,13 @@ namespace EksamensOpgave2015
         private const int EMAIL = 4;
         private const int BALANCE = 5;
 
+        private const int BUYORDEPOSIT = 0;
+        private const int AMOUNT = 1;
+        private const int TRANSLOGNAME = 2;
+        private const int DATE = 3;
+        private const int ID = 4;
+        private const int PRODUCTTIME = 5;
+
         public User user { get; set; }
         public Product product { get; set; }
         public Transaction transaction { get; set; }
@@ -29,11 +36,46 @@ namespace EksamensOpgave2015
         public List<User> UserList = new List<User>();
         public List<Product> ProductList = new List<Product>();
         public List<Transaction> TransactionList = new List<Transaction>();
+        public List<string[]> ReadCharSeparatedFile(string path, char separator)
+        {
+            StreamReader reader = new StreamReader(path, Encoding.Default);
+            List<string[]> fileLineList = new List<string[]>();
+            string line;
+            reader.ReadLine();
+            while ((line = reader.ReadLine()) != null)
+            {
+                string[] values = line.Split(';');
+                fileLineList.Add(values);
+            }
+            reader.Close();
+            return fileLineList;
+        }
+
+        public void ReadTransactionLog()
+        {
+            List<string[]> stringArrList = ReadCharSeparatedFile("transaction.txt", ' ');
+            foreach (string[] stringArr in stringArrList)
+            {
+                if (stringArr[BUYORDEPOSIT] == "Payment")
+                {
+                    TransactionList.Add(new InsertCashTransaction(Int32.Parse(stringArr[ID]), GetUser(stringArr[TRANSLOGNAME]), 
+                        stringArr[DATE], GetProduct(Int32.Parse(stringArr[AMOUNT])).price));
+                }
+                else if (stringArr[BUYORDEPOSIT] == "Buy")
+                {
+                    TransactionList.Add(new BuyTransaction(Int32.Parse(stringArr[ID]), GetUser(stringArr[TRANSLOGNAME]),
+                        stringArr[DATE], decimal.Parse(stringArr[AMOUNT]), GetProduct(Int32.Parse(stringArr[PRODUCTTIME]))));
+                }
+                else
+                    throw new ArgumentOutOfRangeException("Value");
+            }
+        }
 
         public LineSystem()
         {
             ReadFile();
             ReadUser();
+            ReadTransactionLog();
         }
 
         public DateTime Today = DateTime.Today;
@@ -45,7 +87,7 @@ namespace EksamensOpgave2015
         
         public void BuyProduct(User user, Product product)
         {
-            TransactionList.Add(new BuyTransaction(TransactionList.Count + 1, user, Today.ToShortDateString(), product));
+            TransactionList.Add(new BuyTransaction(TransactionList.Count + 1, user, Today.ToShortDateString(), product.price, product));
             ExecuteTransaction(TransactionList[TransactionList.Count - 1]);
         }
 
@@ -119,38 +161,37 @@ namespace EksamensOpgave2015
 
         public void ReadUser()
         {
-            StreamReader readUser = new StreamReader(@"User.txt", Encoding.Default);
-            List<string> ListReader = new List<string>();
-            string line;
-            readUser.ReadLine();
-            while ((line = readUser.ReadLine()) != null)
+            List<string[]> stringArrList = ReadCharSeparatedFile("User.txt", ';');
+            foreach(string[] stringArr in stringArrList)
             {
-                string[] values = line.Split(';');
-
-                UserList.Add(new User(Int32.Parse(values[USERID]), values[FIRSTNAME], values[LASTNAME], values[USERNAME], values[EMAIL], Decimal.Parse(values[BALANCE])));
+                UserList.Add(new User(Int32.Parse(stringArr[USERID]), stringArr[FIRSTNAME], stringArr[LASTNAME], stringArr[USERNAME], stringArr[EMAIL], Decimal.Parse(stringArr[BALANCE])));
             }
-            readUser.Close();
         }
 
-        public void ReadProductData()
-        {
+        //public void ReadProductData()
+        //{
 
-        }
+        //}
+
+        //public void MakeProductCatalogFile()
+        //{
+        //    string text = "";
+        //    foreach (Product product in ProductList)
+        //    {
+        //        text += product.productId + ";" + product.name + ";" + 
+        //            product.price + ";" + product.active + ";" + product.canBeBoughtOnCredit;
+        //    }
+        //    System.IO.File.WriteAllText("Products.txt", text);
+        //}
 
         public void ReadFile()
         {
-            StreamReader reader = new StreamReader(@"products.csv", Encoding.Default);
-            List<string> ListReader = new List<string>();
-            string line;
-            reader.ReadLine();
-            while ((line = reader.ReadLine()) != null)
+            List<string[]> stringArrList = ReadCharSeparatedFile("products.csv", ';');
+            foreach(string[] stringArr in stringArrList)
             {
-                string[] values = line.Split(';');
-                values[PRODUCTNAME] = Regex.Replace(values[PRODUCTNAME], @"<[^>]*>", string.Empty);
-
-                ProductList.Add(new Product(Int32.Parse(values[PRODUCTID]), values[PRODUCTNAME].Trim('"'), decimal.Parse(values[PRODUCTPRICE]), Int32.Parse(values[PRODUCTACTIVE]) == 1 ? true : false));
+                stringArr[PRODUCTNAME] = Regex.Replace(stringArr[PRODUCTNAME], @"<[^>]*>", string.Empty);
+                ProductList.Add(new Product(Int32.Parse(stringArr[PRODUCTID]), stringArr[PRODUCTNAME].Trim('"'), decimal.Parse(stringArr[PRODUCTPRICE]), Int32.Parse(stringArr[PRODUCTACTIVE]) == 1 ? true : false));
             }
-            reader.Close();
         }
     }
 }

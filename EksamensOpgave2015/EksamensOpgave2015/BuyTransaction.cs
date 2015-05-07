@@ -11,15 +11,15 @@ namespace EksamensOpgave2015
         public Product product { get; set; }
         public decimal insertAmount { get; set; }
 
-        public BuyTransaction(decimal transactionID, User user, string date, Product product)
-            : base(transactionID, user, date, product.price)
+        public BuyTransaction(int transactionID, User user, string date, decimal amount, Product product)
+            : base(transactionID, user, date, amount)
         {
             this.product = product;
         }
 
         public override string ToString()
         {
-            return "This happens:" + "" + base.ToString();
+            return "Buy: " + this.amount + " " + this.user + " " + this.date + " " + this.transactionID + " " + this.product.productId;
             //return this.insertAmount + " " + this.amount + " " + this.user + " " + this.date + " " + this.transactionID;
         }
 

@@ -51,7 +51,8 @@ namespace EksamensOpgave2015
 
         public override string ToString()
         {
-            return "ID: " + this.transactionID.ToString().PadLeft(4) + "  Amount: " + this.amount.ToString().PadLeft(4) + "   " + this.date; //MÅSKE... Google
+            return this.transactionID + "" + this.amount + "" + this.date;
+            //return "ID:" + this.transactionID.ToString().PadLeft(4) + ":Amount" + this.amount.ToString().PadLeft(4) + ":Date " + this.date;
         }
 
         public abstract void Execute();
