@@ -10,7 +10,7 @@ namespace EksamensOpgave2015
     {
         static void Main(string[] args)
         {
-            LineSystem linesystem = new LineSystem();
+            Linesystem linesystem = new Linesystem();
             LinesystemCLI cli = new LinesystemCLI(linesystem);
             cli.Start();
             //linesystem.AddUser(1, "Andreas", "Seje", "stored", "ajosefskov@gmail.com", 20);

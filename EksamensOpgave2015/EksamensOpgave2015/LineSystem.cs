@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace EksamensOpgave2015
 {
-    public class LineSystem
+    public class Linesystem
     {
         private const int PRODUCTID = 0;
         private const int PRODUCTNAME = 1; 
@@ -36,6 +36,62 @@ namespace EksamensOpgave2015
         public List<User> UserList = new List<User>();
         public List<Product> ProductList = new List<Product>();
         public List<Transaction> TransactionList = new List<Transaction>();
+
+        public DateTime Today = DateTime.Today;
+
+        public string SetFormatDateTime(DateTime date)
+        {
+            return date.ToString("MM-dd");
+        }
+
+        public Linesystem()
+        {
+            ReadFile();
+            ReadUser();
+            ReadTransactionLog();
+        }
+
+        public void ReadFile()
+        {
+            List<string[]> stringArrList = ReadCharSeparatedFile("products.csv", ';');
+            foreach (string[] stringArr in stringArrList)
+            {
+                stringArr[PRODUCTNAME] = Regex.Replace(stringArr[PRODUCTNAME], @"<[^>]*>", string.Empty);
+                ProductList.Add(new Product(Int32.Parse(stringArr[PRODUCTID]), stringArr[PRODUCTNAME].Trim('"'),
+                    decimal.Parse(stringArr[PRODUCTPRICE]), Int32.Parse(stringArr[PRODUCTACTIVE]) == 1 ? true : false));
+            }
+        }
+
+        public void ReadUser()
+        {
+            List<string[]> stringArrList = ReadCharSeparatedFile("User.txt", ';');
+            foreach (string[] stringArr in stringArrList)
+            {
+                UserList.Add(new User(Int32.Parse(stringArr[USERID]), stringArr[FIRSTNAME], stringArr[LASTNAME],
+                    stringArr[USERNAME], stringArr[EMAIL], Decimal.Parse(stringArr[BALANCE])));
+            }
+        }
+
+        public void ReadTransactionLog()
+        {
+            List<string[]> stringArrList = ReadCharSeparatedFile("transactionLog.txt", ' ');
+            foreach (string[] stringArr in stringArrList)
+            {
+                if (stringArr[BUYORDEPOSIT] == "Payment")
+                {
+                    TransactionList.Add(new InsertCashTransaction(Int32.Parse(stringArr[ID]), GetUser(stringArr[TRANSLOGNAME]),
+                        stringArr[DATE], GetProduct(Int32.Parse(stringArr[AMOUNT])).price));
+                }
+                else if (stringArr[BUYORDEPOSIT] == "Buy")
+                {
+                    TransactionList.Add(new BuyTransaction(Int32.Parse(stringArr[ID]), GetUser(stringArr[TRANSLOGNAME]),
+                        stringArr[DATE], decimal.Parse(stringArr[AMOUNT]), GetProduct(Int32.Parse(stringArr[PRODUCTTIME]))));
+                }
+                else
+                    throw new ArgumentOutOfRangeException("Value");
+            }
+        }
+
         public List<string[]> ReadCharSeparatedFile(string path, char separator)
         {
             StreamReader reader = new StreamReader(path, Encoding.Default);
@@ -51,38 +107,14 @@ namespace EksamensOpgave2015
             return fileLineList;
         }
 
-        public void ReadTransactionLog()
+        public void MakeUserFile()
         {
-            List<string[]> stringArrList = ReadCharSeparatedFile("transaction.txt", ' ');
-            foreach (string[] stringArr in stringArrList)
+            string text = "";
+            foreach (User user in UserList)
             {
-                if (stringArr[BUYORDEPOSIT] == "Payment")
-                {
-                    TransactionList.Add(new InsertCashTransaction(Int32.Parse(stringArr[ID]), GetUser(stringArr[TRANSLOGNAME]), 
-                        stringArr[DATE], GetProduct(Int32.Parse(stringArr[AMOUNT])).price));
-                }
-                else if (stringArr[BUYORDEPOSIT] == "Buy")
-                {
-                    TransactionList.Add(new BuyTransaction(Int32.Parse(stringArr[ID]), GetUser(stringArr[TRANSLOGNAME]),
-                        stringArr[DATE], decimal.Parse(stringArr[AMOUNT]), GetProduct(Int32.Parse(stringArr[PRODUCTTIME]))));
-                }
-                else
-                    throw new ArgumentOutOfRangeException("Value");
+                text += user.ID + ";" + user.firstName + ";" + user.lastName + ";" + user.userName + ";" + user.email + ";" + user.balance + "\n";
             }
-        }
-
-        public LineSystem()
-        {
-            ReadFile();
-            ReadUser();
-            ReadTransactionLog();
-        }
-
-        public DateTime Today = DateTime.Today;
-
-        public string SetFormatDateTime(DateTime date)
-        {
-            return date.ToString("MM-dd");
+            System.IO.File.WriteAllText("User.txt", text);
         }
         
         public void BuyProduct(User user, Product product)
@@ -143,31 +175,11 @@ namespace EksamensOpgave2015
             return ProductList.FindAll(c => c.active == true);
         }
 
-        public void MakeUserFile()
-        {
-            string text = "";
-            foreach (User user in UserList)
-            {
-                text += user.ID + ";" + user.firstName + ";" + user.lastName + ";" + user.userName + ";" + user.email + ";" + user.balance + "\n";
-            }
-            System.IO.File.WriteAllText("User.txt", text);
-        }
-
         public void AddUser(int ID, string firstName, string lastName, string userName, string email, decimal balance)
         {
             UserList.Add(new User(ID, firstName, lastName, userName, email, balance));
             MakeUserFile();
         }
-
-        public void ReadUser()
-        {
-            List<string[]> stringArrList = ReadCharSeparatedFile("User.txt", ';');
-            foreach(string[] stringArr in stringArrList)
-            {
-                UserList.Add(new User(Int32.Parse(stringArr[USERID]), stringArr[FIRSTNAME], stringArr[LASTNAME], stringArr[USERNAME], stringArr[EMAIL], Decimal.Parse(stringArr[BALANCE])));
-            }
-        }
-
         //public void ReadProductData()
         //{
 
@@ -183,16 +195,6 @@ namespace EksamensOpgave2015
         //    }
         //    System.IO.File.WriteAllText("Products.txt", text);
         //}
-
-        public void ReadFile()
-        {
-            List<string[]> stringArrList = ReadCharSeparatedFile("products.csv", ';');
-            foreach(string[] stringArr in stringArrList)
-            {
-                stringArr[PRODUCTNAME] = Regex.Replace(stringArr[PRODUCTNAME], @"<[^>]*>", string.Empty);
-                ProductList.Add(new Product(Int32.Parse(stringArr[PRODUCTID]), stringArr[PRODUCTNAME].Trim('"'), decimal.Parse(stringArr[PRODUCTPRICE]), Int32.Parse(stringArr[PRODUCTACTIVE]) == 1 ? true : false));
-            }
-        }
     }
 }
 

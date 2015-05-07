@@ -8,15 +8,15 @@ namespace EksamensOpgave2015
 {
     public interface ILinesystemUI
     {
-        void DisplayUserNotFound();
-        void DisplayProductNotFound();
+        void DisplayUserNotFound(string message);
+        void DisplayProductNotFound(string message);
         void DisplayUserInfo();
         void DisplayTooManyArgumentsError();
-        void DisplayAdminCommandNotFoundMessage();
+        void DisplayAdminCommandNotFoundMessage(string message);
         void DisplayUserBuysProduct(BuyTransaction transaction);
         void DisplayUserBuysProduct(int count);
         void Close();
-        void DisplayInsufficientCash();
+        void DisplayInsufficientCash(string message);
         void DisplayGeneralError(string errorString);
     }
 }

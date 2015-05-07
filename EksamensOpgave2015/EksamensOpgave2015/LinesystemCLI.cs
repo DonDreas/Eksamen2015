@@ -6,31 +6,48 @@ using System.Threading.Tasks;
 
 namespace EksamensOpgave2015
 {
-    public class LinesystemCLI
+    public class LinesystemCLI : ILinesystemUI
     {
-        public LineSystem Linesystem;
+        public Linesystem Linesystem;
 
-        public LinesystemCLI(LineSystem linesystem)
+        public LinesystemCLI(Linesystem linesystem)
         {
             this.Linesystem = linesystem;
         }
 
         public void Start()
         {
-            Console.WriteLine(PrintProductFormatted());
+            Console.SetWindowSize(75, 30);
+            Console.BufferHeight = 30;
+            Console.BufferWidth = 75;
 
-            foreach (Product product in Linesystem.ProductList)
+            PrintActiveMenu();
+            string input = Console.ReadLine();
+        }
+
+        public void PrintActiveMenu()
+        {
+            Console.CursorVisible = false;
+            Console.Clear();
+
+            Console.WriteLine();
+            Console.WriteLine("Please insert your username and product ID to buy: ");
+            Console.WriteLine();
+
+            Console.Write(PrintProductFormatted().PadRight(Console.WindowWidth));
+            List<Product> Productlist = new List<Product>();
+            Productlist = Linesystem.GetActiveProducts();
+            foreach (Product product in Productlist)
             {
-                if (product.active)
-                {
-                    Console.WriteLine(PrintProductFormatted(product));
-                }
+                Console.Write(PrintProductFormatted(product).PadRight(Console.WindowWidth));
             }
+            Console.SetCursorPosition(51, 1);
+            Console.CursorVisible = true;
         }
 
         public string PrintProductFormatted()
         {
-            return "ID".PadRight(6) + "Produkt".PadRight(36) + "Pris".PadRight(6);
+            return "[ID]".PadRight(6) + "[Produkt]".PadRight(36) + "[Pris]".PadRight(6);
         }
 
         public string PrintProductFormatted(Product product)
@@ -38,12 +55,12 @@ namespace EksamensOpgave2015
             return product.productId.ToString().PadRight(6) + product.name.PadRight(36) + product.price.ToString().PadRight(6);
         }
 
-        public void DisplayUserNotFound()
+        public void DisplayUserNotFound(string message)
         {
 
         }
 
-        public void DisplayProductNotFound()
+        public void DisplayProductNotFound(string message)
         {
 
         }
@@ -58,7 +75,7 @@ namespace EksamensOpgave2015
 
         }
 
-        public void DisplayAdminCommandNotFoundMessage()
+        public void DisplayAdminCommandNotFoundMessage(string message)
         {
 
         }
@@ -75,17 +92,18 @@ namespace EksamensOpgave2015
 
         public void Close()
         {
-
+            Environment.Exit(0); //ikke sikker her. Google sagde det var godt?
         }
 
-        public void DisplayInsufficientCash()
+        public void DisplayInsufficientCash(string message)
         {
 
         }
 
-        public void DisplayGeneralError(string errorString)
+        public void DisplayGeneralError(string message)
         {
-
+            Console.SetCursorPosition(42, 42); //husk at sæt det her rigtigt.
+            Console.WriteLine(message);
         }
     }
 }

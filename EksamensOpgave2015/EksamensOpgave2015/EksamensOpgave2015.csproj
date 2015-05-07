@@ -45,7 +45,8 @@
     <Compile Include="InsertCashTransaction.cs" />
     <Compile Include="InsufficientCreditsException.cs" />
     <Compile Include="ILinesystemUI.cs" />
-    <Compile Include="LineSystem.cs" />
+    <Compile Include="Linesystem.cs" />
+    <Compile Include="LinesystemCommandParser.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
