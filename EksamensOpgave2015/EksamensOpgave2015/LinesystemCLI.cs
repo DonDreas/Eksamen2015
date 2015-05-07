@@ -37,5 +37,55 @@ namespace EksamensOpgave2015
         {
             return product.productId.ToString().PadRight(6) + product.name.PadRight(36) + product.price.ToString().PadRight(6);
         }
+
+        public void DisplayUserNotFound()
+        {
+
+        }
+
+        public void DisplayProductNotFound()
+        {
+
+        }
+
+        public void DisplayUserInfo()
+        {
+
+        }
+
+        public void DisplayTooManyArgumentsError()
+        {
+
+        }
+
+        public void DisplayAdminCommandNotFoundMessage()
+        {
+
+        }
+
+        public void DisplayUserBuysProduct(BuyTransaction transaction)
+        {
+
+        }
+
+        public void DisplayUserBuysProduct(int count)
+        {
+
+        }
+
+        public void Close()
+        {
+
+        }
+
+        public void DisplayInsufficientCash()
+        {
+
+        }
+
+        public void DisplayGeneralError(string errorString)
+        {
+
+        }
     }
 }
