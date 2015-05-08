@@ -17,6 +17,6 @@ namespace EksamensOpgave2015
         void DisplayUserBuysProduct(int count);
         void Close();
         void DisplayInsufficientCash(string message);
-        void DisplayGeneralError(string errorString);
+        void DisplayGeneralError(string message);
     }
 }

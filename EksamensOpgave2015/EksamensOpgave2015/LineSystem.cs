@@ -49,6 +49,8 @@ namespace EksamensOpgave2015
             ReadFile();
             ReadUser();
             ReadTransactionLog();
+            //MakeUserFile();
+            //ExecuteTransaction(transaction);
         }
 
         public void ReadFile()
@@ -116,20 +118,8 @@ namespace EksamensOpgave2015
             }
             System.IO.File.WriteAllText("User.txt", text);
         }
-        
-        public void BuyProduct(User user, Product product)
-        {
-            TransactionList.Add(new BuyTransaction(TransactionList.Count + 1, user, Today.ToShortDateString(), product.price, product));
-            ExecuteTransaction(TransactionList[TransactionList.Count - 1]);
-        }
 
-        public void AddCreditsToAccount(User user, decimal amount)
-        {
-            TransactionList.Add(new InsertCashTransaction(TransactionList.Count + 1, user, Today.ToShortDateString(), amount));
-            ExecuteTransaction(TransactionList[TransactionList.Count - 1]);
-        }
-
-        public void ExecuteTransaction(Transaction transaction) 
+        public void ExecuteTransaction(Transaction transaction)
         {
             try
             {
@@ -148,6 +138,18 @@ namespace EksamensOpgave2015
             {
                 throw e;
             }
+        }
+        
+        public void BuyProduct(User user, Product product)
+        {
+            TransactionList.Add(new BuyTransaction(TransactionList.Count + 1, user, Today.ToShortDateString(), product.price, product));
+            ExecuteTransaction(TransactionList[TransactionList.Count - 1]);
+        }
+
+        public void AddCreditsToAccount(User user, decimal amount)
+        {
+            TransactionList.Add(new InsertCashTransaction(TransactionList.Count + 1, user, Today.ToShortDateString(), amount));
+            ExecuteTransaction(TransactionList[TransactionList.Count - 1]);
         }
 
         public Product GetProduct(int productId)
