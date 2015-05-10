@@ -45,6 +45,23 @@ namespace EksamensOpgave2015
             Console.CursorVisible = true;
         }
 
+        public void PrintUserMenu(User user)
+        {
+            Console.CursorVisible = false;
+            ConsoleKeyInfo cki;
+            do
+            {
+                cki = Console.ReadKey();
+
+                Console.WriteLine(string.Format(" Username: {0}", user.userName));
+                Console.WriteLine(string.Format(" Full Name: {0} {1}", user.firstName, user.lastName));
+                Console.WriteLine(string.Format(" Balance: {0}kr.", user.balance.ToString(" "))); //Google siger, at der skal et bogstav ind her, hvorfor??? F
+
+            } 
+            while (cki.Key != ConsoleKey.Escape);
+            PrintActiveMenu();
+        }
+
         public string PrintProductFormatted()
         {
             return "[ID]".PadRight(6) + "[Produkt]".PadRight(36) + "[Pris]".PadRight(6);
@@ -57,12 +74,14 @@ namespace EksamensOpgave2015
 
         public void DisplayUserNotFound(string message)
         {
-            throw new NotImplementedException();
+            ErrorLine();
+            Console.Write(string.Format("The user was not found"));
         }
 
         public void DisplayProductNotFound(string message)
         {
-            throw new NotImplementedException();
+            ErrorLine();
+            Console.Write(string.Format("The product was not found"));
         }
 
         public void DisplayUserInfo()
@@ -72,22 +91,24 @@ namespace EksamensOpgave2015
 
         public void DisplayTooManyArgumentsError()
         {
-
+            ErrorLine();
+            Console.Write(string.Format("Too many arguments!"));
         }
 
         public void DisplayAdminCommandNotFoundMessage(string message)
         {
-
+            ErrorLine();
+            Console.Write(string.Format("Admin command was not found"));
         }
 
         public void DisplayUserBuysProduct(BuyTransaction transaction)
         {
-
+            throw new NotImplementedException();
         }
 
         public void DisplayUserBuysProduct(int count)
         {
-
+            throw new NotImplementedException();
         }
 
         public void Close()
@@ -102,8 +123,14 @@ namespace EksamensOpgave2015
 
         public void DisplayGeneralError(string message)
         {
-            Console.SetCursorPosition(42, 42); //husk at sæt det her rigtigt.
-            Console.WriteLine(message);
+            ErrorLine();
+            Console.Write("Something went wrong. Try again.");
+        }
+
+        public void ErrorLine()
+        {
+            Console.SetCursorPosition(10, 50);
+            Console.Write(new string(' ', Console.WindowWidth));
         }
     }
 }
