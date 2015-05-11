@@ -89,7 +89,7 @@ namespace EksamensOpgave2015
 
         }
 
-        public void DisplayTooManyArgumentsError()
+        public void DisplayTooManyArgumentsError(string message)
         {
             ErrorLine();
             Console.Write(string.Format("Too many arguments!"));

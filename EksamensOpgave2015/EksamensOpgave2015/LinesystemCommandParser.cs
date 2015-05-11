@@ -8,12 +8,12 @@ namespace EksamensOpgave2015
 {
     public class LinesystemCommandParser
     {
-        ILinesystemUI LinesystenCLI;
+        ILinesystemUI LinesystemCLI;
         Linesystem Linesystem;
 
         public LinesystemCommandParser(ILinesystemUI linesystemCLI, Linesystem linesystem)
         {
-            this.LinesystenCLI = linesystemCLI;
+            this.LinesystemCLI = linesystemCLI;
             this.Linesystem = linesystem;
         }
 
@@ -47,11 +47,9 @@ namespace EksamensOpgave2015
         //                LinesystenCLI.Close();
         //                break;
         //            case ":activate":
-        //                break;
         //            case ":deactivate":
         //                break;
         //            case ":crediton":
-        //                break;
         //            case ":creditoff":
         //                break;
         //            case ":addcredits":
@@ -68,7 +66,7 @@ namespace EksamensOpgave2015
             User user;
             if (username == "")
             {
-                LinesystenCLI.DisplayGeneralError("Incorrect username");
+                LinesystemCLI.DisplayGeneralError("Incorrect username");
             }
             else
             {
@@ -78,11 +76,11 @@ namespace EksamensOpgave2015
                 }
                 catch (UserNotFoundException e)
                 {
-                    LinesystenCLI.DisplayUserNotFound(e.Message, username);
+                    LinesystemCLI.DisplayUserNotFound(e.Message, username);
                 }
                 catch (Exception e)
                 {
-                    LinesystenCLI.DisplayGeneralError(e.Message);
+                    LinesystemCLI.DisplayGeneralError(e.Message);
                 }
             }
         }
@@ -99,28 +97,80 @@ namespace EksamensOpgave2015
                 {
                     product = Linesystem.GetProduct(id);
                     Linesystem.BuyProduct(user, product);
-                    LinesystenCLI.DisplayUserBuysProduct((BuyTransaction)Linesystem.GetTransactionList(user, 1).Last());
+                    LinesystemCLI.DisplayUserBuysProduct((BuyTransaction)Linesystem.GetTransactionList(user, 1).Last());
                 }
                 else
                 {
-                    LinesystenCLI.DisplayGeneralError("Something went wrong");
+                    LinesystemCLI.DisplayGeneralError("Something went wrong");
                 }
             }
             catch (UserNotFoundException e)
             {
-                LinesystenCLI.DisplayUserNotFound(e.Message, username);
+                LinesystemCLI.DisplayUserNotFound(e.Message, username);
             }
             catch (ProductNotFoundException e)
             {
-                LinesystenCLI.DisplayProductNotFound(e.Message, productID);
+                LinesystemCLI.DisplayProductNotFound(e.Message, productID);
             }
             catch (InsufficientCreditsException e)
             {
-                LinesystenCLI.DisplayInsufficientCash(e.Message);
+                LinesystemCLI.DisplayInsufficientCash(e.Message);
             }
             catch (Exception e)
             {
-                LinesystenCLI.DisplayGeneralError(e.Message);
+                LinesystemCLI.DisplayGeneralError(e.Message);
+            }
+        }
+
+        public void AdminCommandAdtivate(string[] commands)
+        {
+            Product product;
+            int id;
+            switch (commands.Length)
+            {
+                case 1:
+                    LinesystemCLI.DisplayGeneralError("Cannot activate the product.");
+                    break;
+                case 2:
+                    try
+                    {
+                        if (Int32.TryParse(commands[1], out id))
+                        {
+                            product = Linesystem.GetProduct(id);
+                            switch (commands[0])
+                            {
+                                case ":activate":
+                                    product.active = true;
+                                    LinesystemCLI.PrintActiveMenu();
+                                    break;
+                                case ":deactivate":
+                                    product.active = false;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            LinesystemCLI.DisplayGeneralError("Something went wrong.");
+                        }
+                    }
+                    catch (ProductNotFoundException e)
+                    {
+                        LinesystemCLI.DisplayProductNotFound(commands[1], e.Message);
+                    }
+                    catch (ProductNotActiveException e)
+                    {
+                        LinesystemCLI.DisplayGeneralError(e.Message);
+                    }
+                    catch (Exception e)
+                    {
+                        LinesystemCLI.DisplayGeneralError(e.Message);
+                    }
+                    break;
+                default:
+                    LinesystemCLI.DisplayTooManyArgumentsError("Too many arguments!");
+                    break;
             }
         }
     }
