@@ -34,7 +34,7 @@ namespace EksamensOpgave2015
         //                ExecuteCommandUser(commands[0], commands[1], commands[2]);
         //                break;
         //            default:
-        //                LinesystenCLI.DisplayGeneralError("This command is not recognized. Please try again.");
+        //                LinesystemCLI.DisplayGeneralError("This command is not recognized. Please try again.");
         //                break;
         //        }
         //    }
@@ -44,18 +44,22 @@ namespace EksamensOpgave2015
         //        {
         //            case ":q":
         //            case ":quit":
-        //                LinesystenCLI.Close();
+        //                LinesystemCLI.Close();
         //                break;
         //            case ":activate":
         //            case ":deactivate":
+        //                AdminCommandAdtivate(commands);
         //                break;
         //            case ":crediton":
+
         //            case ":creditoff":
+        //                BuyOnCredit(commands);
         //                break;
         //            case ":addcredits":
+        //                AddCredit(commands);
         //                break;
         //            default:
-        //                LinesystenCLI.DisplayGeneralError("Something went wrong! Please try again");
+        //                LinesystemCLI.DisplayGeneralError("Something went wrong! Please try again");
         //                break;
         //        }
         //    }
@@ -153,6 +157,96 @@ namespace EksamensOpgave2015
                         else
                         {
                             LinesystemCLI.DisplayGeneralError("Something went wrong.");
+                        }
+                    }
+                    catch (ProductNotFoundException e)
+                    {
+                        LinesystemCLI.DisplayProductNotFound(commands[1], e.Message);
+                    }
+                    catch (ProductNotActiveException e)
+                    {
+                        LinesystemCLI.DisplayGeneralError(e.Message);
+                    }
+                    catch (Exception e)
+                    {
+                        LinesystemCLI.DisplayGeneralError(e.Message);
+                    }
+                    break;
+                default:
+                    LinesystemCLI.DisplayTooManyArgumentsError("Too many arguments!");
+                    break;
+            }
+        }
+
+        public void AddCredit(string[] commands)
+        {
+            User user;
+            decimal amount;
+            switch (commands.Length)
+            {
+                case 1:
+                    LinesystemCLI.DisplayGeneralError("Cannot and credit username and amount.");
+                    break;
+                case 2:
+                    try
+                    {
+                        user = Linesystem.GetUser(commands[1]);
+                        if (user != null)
+                        {
+                            if (Decimal.TryParse(commands[2], out amount))
+                            {
+                                Linesystem.AddCreditsToAccount(user, amount);
+                            }
+                        }
+                        else
+                        {
+                            LinesystemCLI.DisplayGeneralError("Something went wrong");
+                        }
+                    }
+                    catch (UserNotFoundException e)
+                    {
+                        LinesystemCLI.DisplayUserNotFound(commands[1], e.Message);
+                    }
+                    catch (Exception e)
+                    {
+                        LinesystemCLI.DisplayGeneralError(e.Message);
+                    }
+                    break;
+                default:
+                    LinesystemCLI.DisplayTooManyArgumentsError("Something went wrong. Wrong format.");
+                    break;
+            }
+        }
+        public void BuyOnCredit(string[] commands)
+        {
+            Product product;
+            int id;
+            switch (commands.Length)
+            {
+                case 1:
+                    LinesystemCLI.DisplayGeneralError("Cannot activate credit.");
+                    break;
+                case 2:
+                    try
+                    {
+                        if (Int32.TryParse(commands[1], out id))
+                        {
+                            product = Linesystem.GetProduct(id);
+                            switch (commands[0])
+                            {
+                                case ":crediton":
+                                    product.canBeBoughtOnCredit = true;
+                                    break;
+                                case ":creditoff":
+                                    product.canBeBoughtOnCredit = false;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            LinesystemCLI.DisplayGeneralError("Something went wrong");
                         }
                     }
                     catch (ProductNotFoundException e)
