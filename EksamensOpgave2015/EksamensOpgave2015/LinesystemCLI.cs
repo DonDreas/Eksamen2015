@@ -72,16 +72,16 @@ namespace EksamensOpgave2015
             return product.productId.ToString().PadRight(6) + product.name.PadRight(36) + product.price.ToString().PadRight(6);
         }
 
-        public void DisplayUserNotFound(string message)
+        public void DisplayUserNotFound(string username, string message)
         {
             ErrorLine();
-            Console.Write(string.Format("The user was not found"));
+            Console.Write(string.Format("Username[" + username + "] was not found.", username));
         }
 
-        public void DisplayProductNotFound(string message)
+        public void DisplayProductNotFound(string productID, string message)
         {
             ErrorLine();
-            Console.Write(string.Format("The product was not found"));
+            Console.Write(string.Format("Product[" + productID + "] was not found.", productID));
         }
 
         public void DisplayUserInfo()

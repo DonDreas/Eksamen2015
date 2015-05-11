@@ -78,7 +78,7 @@ namespace EksamensOpgave2015
                 }
                 catch (UserNotFoundException e)
                 {
-                    LinesystenCLI.DisplayUserNotFound(e.Message);
+                    LinesystenCLI.DisplayUserNotFound(e.Message, username);
                 }
                 catch (Exception e)
                 {
@@ -91,35 +91,36 @@ namespace EksamensOpgave2015
         {
             User user;
             Product product;
+            int id;
             try
             {
                 user = Linesystem.GetUser(username);
+                if (Int32.TryParse(productID, out id))
+                {
+                    product = Linesystem.GetProduct(id);
+                    Linesystem.BuyProduct(user, product);
+                    LinesystenCLI.DisplayUserBuysProduct((BuyTransaction)Linesystem.GetTransactionList(user, 1).Last());
+                }
+                else
+                {
+                    LinesystenCLI.DisplayGeneralError("Something went wrong");
+                }
             }
             catch (UserNotFoundException e)
             {
-                LinesystenCLI.DisplayUserNotFound(e.Message);
+                LinesystenCLI.DisplayUserNotFound(e.Message, username);
             }
-
-            int id;
-            bool commandID = Int32.TryParse(productID, out id);
-            if (commandID)
+            catch (ProductNotFoundException e)
             {
-                try
-                {
-                    product = Linesystem.GetProduct(id);
-                }
-                catch (ProductNotFoundException e)
-                {
-                    LinesystenCLI.DisplayProductNotFound(e.Message);
-                }
-                catch (ProductNotActiveException e)
-                {
-                    LinesystenCLI.DisplayGeneralError(e.Message);
-                }
+                LinesystenCLI.DisplayProductNotFound(e.Message, productID);
             }
-            else
+            catch (InsufficientCreditsException e)
             {
-                LinesystenCLI.DisplayProductNotFound("Hvad skal der skrives her? FEJL");
+                LinesystenCLI.DisplayInsufficientCash(e.Message);
+            }
+            catch (Exception e)
+            {
+                LinesystenCLI.DisplayGeneralError(e.Message);
             }
         }
     }
