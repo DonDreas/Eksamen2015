@@ -126,7 +126,7 @@ namespace EksamensOpgave2015
             }
         }
 
-        public void AdminCommandAdtivate(string[] commands)
+        public void AdminCommandActivate(string[] commands)
         {
             Product product;
             int id;

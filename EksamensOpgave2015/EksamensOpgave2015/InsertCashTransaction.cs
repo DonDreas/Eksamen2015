@@ -18,7 +18,6 @@ namespace EksamensOpgave2015
         public override string ToString()
         {
             return "Payment " + this.amount + " " + this.user + " " + this.date + " " + this.transactionID;
-            //return this.amount + " " + this.user + " " + this.date + " " + this.transactionID;
         }
 
         public override void Execute()

@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EksamensOpgave2015.BuyTransaction" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAQEAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>BuyTransaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensOpgave2015.InsertCashTransaction" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InsertCashTransaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensOpgave2015.InsufficientCreditsException" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Exceptions\InsufficientCreditsException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensOpgave2015.Linesystem" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAIEggCwAgIQAACAtAAIgEIgAAoGQEACCQAgQg=</HashCode>
+      <FileName>Linesystem-Fase\Linesystem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensOpgave2015.LinesystemCLI" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAEAAAACACAAgiAgAAKAAAAACACAAAABAAAAAACAAAA=</HashCode>
+      <FileName>Linesystem-Fase\LinesystemCLI.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EksamensOpgave2015.LinesystemCommandParser" Collapsed="true">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAgAAAAAAAAAAAAAAAQAADAAACAAAIAA=</HashCode>
+      <FileName>Linesystem-Fase\LinesystemCommandParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensOpgave2015.Product" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgABoBAAAAAAAAAAAAAAAAAgAAAEAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensOpgave2015.ProductNotActiveException" Collapsed="true">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\ProductNotActiveException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensOpgave2015.ProductNotFoundException" Collapsed="true">
+    <Position X="8.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\ProductNotFoundException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensOpgave2015.Program" Collapsed="true">
+    <Position X="5.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensOpgave2015.SeasonalProduct" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABQAAAAAAAAQACAAAAAIAAAAAA=</HashCode>
+      <FileName>SeasonalProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensOpgave2015.Transaction" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAQEBAAAAAAAAAAAgIAAAAAAAQAAAQA=</HashCode>
+      <FileName>Transaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensOpgave2015.User" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEACAAAAABAgAQggAEAAAAIAAAAAIAAAAIACAEAAAE=</HashCode>
+      <FileName>User.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EksamensOpgave2015.UserNotFoundException" Collapsed="true">
+    <Position X="8.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\UserNotFoundException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="EksamensOpgave2015.ILinesystemUI" Collapsed="true">
+    <Position X="5.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAAAAAACAAAAgCAAAACAAAAACACAAAABAAAAAACAAAA=</HashCode>
+      <FileName>Interface\ILinesystemUI.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

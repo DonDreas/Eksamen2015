@@ -43,23 +43,24 @@
   <ItemGroup>
     <Compile Include="BuyTransaction.cs" />
     <Compile Include="InsertCashTransaction.cs" />
-    <Compile Include="InsufficientCreditsException.cs" />
-    <Compile Include="ILinesystemUI.cs" />
-    <Compile Include="Linesystem.cs" />
-    <Compile Include="LinesystemCommandParser.cs" />
+    <Compile Include="Exceptions\InsufficientCreditsException.cs" />
+    <Compile Include="Interface\ILinesystemUI.cs" />
+    <Compile Include="Linesystem-Fase\Linesystem.cs" />
+    <Compile Include="Linesystem-Fase\LinesystemCommandParser.cs" />
     <Compile Include="Product.cs" />
-    <Compile Include="ProductNotActiveException.cs" />
-    <Compile Include="ProductNotFoundException.cs" />
+    <Compile Include="Exceptions\ProductNotActiveException.cs" />
+    <Compile Include="Exceptions\ProductNotFoundException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeasonalProduct.cs" />
-    <Compile Include="LinesystemCLI.cs" />
+    <Compile Include="Linesystem-Fase\LinesystemCLI.cs" />
     <Compile Include="Transaction.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="UserNotFoundException.cs" />
+    <Compile Include="Exceptions\UserNotFoundException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Klasse Diagram\ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

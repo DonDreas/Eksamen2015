@@ -59,13 +59,13 @@ namespace EksamensOpgave2015
         public void DisplayUserNotFound(string username, string message)
         {
             ErrorLine();
-            Console.Write(string.Format("Username[" + username + "] was not found.", username));
+            Console.Write("Username[" + username + "] was not found.", username);
         }
 
         public void DisplayProductNotFound(string productID, string message)
         {
             ErrorLine();
-            Console.Write(string.Format("Product[" + productID + "] was not found.", productID));
+            Console.Write("Product[" + productID + "] was not found.", productID);
         }
 
         public void DisplayUserInfo(User user)
@@ -76,8 +76,8 @@ namespace EksamensOpgave2015
             {
                 cki = Console.ReadKey();
 
-                Console.WriteLine(string.Format(" Username: {0}", user.userName));
-                Console.WriteLine(string.Format(" Full Name: {0} {1}", user.firstName, user.lastName));
+                Console.WriteLine(" Username: {0}", user.userName);
+                Console.WriteLine(" Full Name: {0} {1}", user.firstName, user.lastName);
             } 
             while (cki.Key != ConsoleKey.Escape);
             PrintActiveMenu();

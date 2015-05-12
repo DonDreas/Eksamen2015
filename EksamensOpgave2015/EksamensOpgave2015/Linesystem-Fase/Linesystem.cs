@@ -49,8 +49,6 @@ namespace EksamensOpgave2015
             ReadFile();
             ReadUser();
             ReadTransactionLog();
-            //MakeUserFile();
-            //ExecuteTransaction(transaction);
         }
 
         public void ReadFile()
@@ -182,21 +180,6 @@ namespace EksamensOpgave2015
             UserList.Add(new User(ID, firstName, lastName, userName, email, balance));
             MakeUserFile();
         }
-        //public void ReadProductData()
-        //{
-
-        //}
-
-        //public void MakeProductCatalogFile()
-        //{
-        //    string text = "";
-        //    foreach (Product product in ProductList)
-        //    {
-        //        text += product.productId + ";" + product.name + ";" + 
-        //            product.price + ";" + product.active + ";" + product.canBeBoughtOnCredit;
-        //    }
-        //    System.IO.File.WriteAllText("Products.txt", text);
-        //}
     }
 }
 
