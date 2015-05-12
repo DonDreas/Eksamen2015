@@ -11,12 +11,14 @@ namespace EksamensOpgave2015
         public Product product { get; set; }
         public decimal insertAmount { get; set; }
 
+        //Nedarver fra Transactions klassen.
         public BuyTransaction(int transactionID, User user, string date, decimal amount, Product product)
             : base(transactionID, user, date, amount)
         {
             this.product = product;
         }
 
+        //Den givne string, der bliver vist, når der købes et produkt.
         public override string ToString()
         {
             return "Buy: " + this.amount + " " + this.user + " " + this.date + " " + this.transactionID + " " + this.product.productId;

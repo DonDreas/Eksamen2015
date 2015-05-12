@@ -8,11 +8,13 @@ namespace EksamensOpgave2015
 {
     public class InsertCashTransaction : Transaction
     {
+        //Nedarver fra Transactions klassen
         public InsertCashTransaction(int transactionId, User user, string date, decimal amount)
             : base(transactionId, user, date, amount)
         {
         }
 
+        //Den string der bliver vist, når der skal betales. 
         public override string ToString()
         {
             return "Payment " + this.amount + " " + this.user + " " + this.date + " " + this.transactionID;

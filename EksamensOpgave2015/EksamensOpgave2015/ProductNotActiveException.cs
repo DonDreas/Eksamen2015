@@ -8,6 +8,7 @@ namespace EksamensOpgave2015
 {
     public class ProductNotActiveException : Exception
     {
+        //laver exception-klasser, som kan kaldes i programmet, frem for at skrive dem igen og igen. 
         public ProductNotActiveException(Product product)
             : base("Currently product is not active and cannot be bought.")
         {

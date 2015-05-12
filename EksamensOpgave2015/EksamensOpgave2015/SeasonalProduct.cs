@@ -8,6 +8,7 @@ namespace EksamensOpgave2015
 {
     public class SeasonalProduct : Product
     {
+        //Nedarver fra klassen Product.
         private string _seasonStartDate;
         public string seasonStartDate 
         {

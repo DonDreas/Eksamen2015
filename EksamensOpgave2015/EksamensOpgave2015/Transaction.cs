@@ -46,13 +46,9 @@ namespace EksamensOpgave2015
             this.amount = amount;
         }
 
-        //new public abstract string toString();
-        //new public abstract decimal Execute();
-
         public override string ToString()
         {
             return this.transactionID + "" + this.amount + "" + this.date;
-            //return "ID:" + this.transactionID.ToString().PadLeft(4) + ":Amount" + this.amount.ToString().PadLeft(4) + ":Date " + this.date;
         }
 
         public abstract void Execute();

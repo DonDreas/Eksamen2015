@@ -8,6 +8,7 @@ namespace EksamensOpgave2015
 {
     public class Product
     {
+        //Product handler primæret om at lave propeties til de givne krav.
         private int _produktId;
         public int productId
         {

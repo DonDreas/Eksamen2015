@@ -22,6 +22,7 @@ namespace EksamensOpgave2015
             Console.BufferWidth = 75;
 
             PrintActiveMenu();
+            
             string input = Console.ReadLine();
         }
 
@@ -43,23 +44,6 @@ namespace EksamensOpgave2015
             }
             Console.SetCursorPosition(51, 1);
             Console.CursorVisible = true;
-        }
-
-        public void PrintUserMenu(User user)
-        {
-            Console.CursorVisible = false;
-            ConsoleKeyInfo cki;
-            do
-            {
-                cki = Console.ReadKey();
-
-                Console.WriteLine(string.Format(" Username: {0}", user.userName));
-                Console.WriteLine(string.Format(" Full Name: {0} {1}", user.firstName, user.lastName));
-                Console.WriteLine(string.Format(" Balance: {0}kr.", user.balance.ToString(" "))); //Google siger, at der skal et bogstav ind her, hvorfor??? F
-
-            } 
-            while (cki.Key != ConsoleKey.Escape);
-            PrintActiveMenu();
         }
 
         public string PrintProductFormatted()
@@ -84,26 +68,44 @@ namespace EksamensOpgave2015
             Console.Write(string.Format("Product[" + productID + "] was not found.", productID));
         }
 
-        public void DisplayUserInfo()
+        public void DisplayUserInfo(User user)
         {
+            Console.CursorVisible = false;
+            ConsoleKeyInfo cki;
+            do
+            {
+                cki = Console.ReadKey();
 
+                Console.WriteLine(string.Format(" Username: {0}", user.userName));
+                Console.WriteLine(string.Format(" Full Name: {0} {1}", user.firstName, user.lastName));
+            } 
+            while (cki.Key != ConsoleKey.Escape);
+            PrintActiveMenu();
         }
 
         public void DisplayTooManyArgumentsError(string message)
         {
             ErrorLine();
-            Console.Write(string.Format("Too many arguments!"));
+            Console.Write("Too many arguments! " + message);
+        }
+
+        public void DisplayAdminCommandCompleted(string message)
+        {
+            ErrorLine();
+            Console.Write("Admin command: [" + message + "] succes!");
         }
 
         public void DisplayAdminCommandNotFoundMessage(string message)
         {
             ErrorLine();
-            Console.Write(string.Format("Admin command was not found"));
+            Console.Write("Admin command: [" + message + "] was not recognized!");
         }
 
         public void DisplayUserBuysProduct(BuyTransaction transaction)
         {
-            throw new NotImplementedException();
+            ErrorLine();
+            Console.WriteLine("Succes.");
+            Console.Write(transaction.ToString());
         }
 
         public void DisplayUserBuysProduct(int count)
@@ -113,12 +115,12 @@ namespace EksamensOpgave2015
 
         public void Close()
         {
-            Environment.Exit(0); //ikke sikker her. Google sagde det var godt?
+            Environment.Exit(0);
         }
 
         public void DisplayInsufficientCash(string message)
         {
-
+            ErrorLine();
         }
 
         public void DisplayGeneralError(string message)

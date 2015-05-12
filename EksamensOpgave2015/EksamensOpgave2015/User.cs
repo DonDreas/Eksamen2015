@@ -9,6 +9,7 @@ namespace EksamensOpgave2015
 {
     public class User : IComparable
     {
+        //User klassen går hovedsageligt ud på, at lave propeties til hver af de følgende krav, så de opfylder de givne kriterier. 
         public int ID { get; set; }
 
         private string _firstName;
@@ -50,6 +51,7 @@ namespace EksamensOpgave2015
             }
         }
 
+        //Splitter ved @. På den måde er det lettere at opfylde kriterierne.
         private string _email;
         public string email
         {
@@ -96,6 +98,7 @@ namespace EksamensOpgave2015
             return "" + this.firstName + " " + this.lastName + "( " + this.email + ")";
         }
 
+        //Min hashcode er i dette tilfælde ID, da det er unikt i programmmet.
         public override int GetHashCode()
         {
             return this.ID;

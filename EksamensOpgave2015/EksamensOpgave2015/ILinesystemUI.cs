@@ -8,10 +8,11 @@ namespace EksamensOpgave2015
 {
     public interface ILinesystemUI
     {
+        //Interface over linesystemCLIs metoder
         void PrintActiveMenu();
         void DisplayUserNotFound(string message, string username);
         void DisplayProductNotFound(string message, string productID);
-        void DisplayUserInfo();
+        void DisplayUserInfo(User user);
         void DisplayTooManyArgumentsError(string message);
         void DisplayAdminCommandNotFoundMessage(string message);
         void DisplayUserBuysProduct(BuyTransaction transaction);
