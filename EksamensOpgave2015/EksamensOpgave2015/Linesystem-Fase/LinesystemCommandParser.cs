@@ -17,53 +17,47 @@ namespace EksamensOpgave2015
             this.Linesystem = linesystem;
         }
 
-        //public void ParseCommand(string command)
-        //{
-        //    string[] commands = command.Split(' ');
-        //    if (commands[0].ElementAtOrDefault(0) != ':')
-        //    {
-        //        switch (command.Length)
-        //        {
-        //            case 1:
-        //                ExecuteCommandUser(commands[0]);
-        //                break;
-        //            case 2:
-        //                ExecuteCommandUser(commands[0], commands[1]);
-        //                break;
-        //            case 3:
-        //                ExecuteCommandUser(commands[0], commands[1], commands[2]);
-        //                break;
-        //            default:
-        //                LinesystemCLI.DisplayGeneralError("This command is not recognized. Please try again.");
-        //                break;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        switch (commands[0])
-        //        {
-        //            case ":q":
-        //            case ":quit":
-        //                LinesystemCLI.Close();
-        //                break;
-        //            case ":activate":
-        //            case ":deactivate":
-        //                AdminCommandAdtivate(commands);
-        //                break;
-        //            case ":crediton":
+        public void ParseCommand(string command)
+        {
+            string[] commands = command.Split(' ');
+            if (commands[0].ElementAtOrDefault(0) != ':')
+            {
+                switch (command.Length)
+                {
+                    case 1:
+                        ExecuteCommandUser(commands[0]);
+                        break;
+                    default:
+                        LinesystemCLI.DisplayGeneralError("This command is not recognized. Please try again.");
+                        break;
+                }
+            }
+            else
+            {
+                switch (commands[0])
+                {
+                    case ":q":
+                    case ":quit":
+                        LinesystemCLI.Close();
+                        break;
+                    case ":activate":
+                    case ":deactivate":
+                        AdminCommandActivate(commands);
+                        break;
+                    case ":crediton":
 
-        //            case ":creditoff":
-        //                BuyOnCredit(commands);
-        //                break;
-        //            case ":addcredits":
-        //                AddCredit(commands);
-        //                break;
-        //            default:
-        //                LinesystemCLI.DisplayGeneralError("Something went wrong! Please try again");
-        //                break;
-        //        }
-        //    }
-        //}
+                    case ":creditoff":
+                        BuyOnCredit(commands);
+                        break;
+                    case ":addcredits":
+                        AddCredit(commands);
+                        break;
+                    default:
+                        LinesystemCLI.DisplayGeneralError("Something went wrong! Please try again");
+                        break;
+                }
+            }
+        }
 
         public void ExecuteCommandUser(string username)
         {
